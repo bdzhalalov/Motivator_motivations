@@ -1,5 +1,4 @@
 from .models import Motivation
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.decorators import permission_classes
@@ -8,16 +7,13 @@ from .serializers import MotivationSerializer, AddMotivationSerializer
 from django.http import Http404
 from rest_framework.response import Response
 
-class MotivationListPagination(PageNumberPagination):
-    page_size = 5
-    page_size_query_param = 'page_size'
-    max_page_size = 5
+
 
 class MotivationList(ListAPIView):
     serializer_class = MotivationSerializer
     queryset = Motivation.objects.all()
-    pagination_class = MotivationListPagination
 
+    
 class MotivationListDetails(ListAPIView):
     serializer_class = MotivationSerializer
 
@@ -42,7 +38,7 @@ class MotivationView(APIView):
     def post(self, request):
         serializer = AddMotivationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(nickname=request.user)
+        serializer.save()
         return Response('Motivation successfully saved')
 
     

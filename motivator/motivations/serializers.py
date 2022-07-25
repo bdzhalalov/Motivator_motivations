@@ -6,10 +6,10 @@ class MotivationSerializer(ModelSerializer):
     class Meta:
 
         model = Motivation
-        fields = ('nickname', 'motivation')
+        fields = ('id', 'nickname', 'motivation')
 
 class AddMotivationSerializer(ModelSerializer):
     class Meta:
 
         model = Motivation
-        fields = ('motivation',)
+        fields = ('nickname', 'motivation')
