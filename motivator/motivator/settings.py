@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'motivations',
     'rest_framework',
+    'drf_yasg',
 ]
 
 REST_FRAMEWORK = {
