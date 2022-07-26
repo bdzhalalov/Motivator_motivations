@@ -7,7 +7,9 @@ WORKDIR /usr/src/Motivator_motivations
 
 COPY ./requirements.txt /usr/src/requirements.txt
 RUN apk add --no-cache mariadb-connector-c-dev
-RUN  pip install -r /usr/src/requirements.txt
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev
+RUN pip install -r /usr/src/requirements.txt
+RUN apk del .build-deps
 
 COPY . /usr/src/Motivator_motivations
 
