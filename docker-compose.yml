@@ -6,9 +6,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      - MYSQL_USER=baha
-      - MYSQL_PASSWORD=BaHa12062000
-      - MYSQL_ROOT_PASSWORD=BaHa1206
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=motivation
     ports:
       [3306:3306]

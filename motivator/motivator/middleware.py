@@ -8,7 +8,6 @@ class CheckTokenMiddleware(MiddlewareMixin):
         auth = request.META.get('HTTP_AUTHORIZATION')
         hosts = request.META.get('HTTP_HOST')
         host = hosts[:9]
-        print(host)
         if auth != TOKEN and host not in ALLOWED_HOSTS:
             raise PermissionDenied()
 
