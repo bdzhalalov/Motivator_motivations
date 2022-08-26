@@ -1,43 +1,42 @@
-from django.shortcuts import render, redirect
-from .forms import MotivationForm
 from .models import Motivation
-from django.core.paginator import Paginator
-from django.views.generic import CreateView
+from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import AllowAny
+from .serializers import MotivationSerializer, AddMotivationSerializer
+from django.http import Http404
+from rest_framework.response import Response
 
 
-def list(request):
-    motivations = Motivation.objects.all()
-    paginator = Paginator(motivations, 5)
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'main.html', {'page_obj': page_obj})
+class MotivationList(ListAPIView):
+    serializer_class = MotivationSerializer
+    queryset = Motivation.objects.all()
 
+    
+class MotivationListDetails(ListAPIView):
+    serializer_class = MotivationSerializer
 
-def random_motivation(request):
-    random_motivation = Motivation.objects.all().order_by('?')[:1]
-    return render(request, 'home.html', {'random_motivation': random_motivation})
+    def get_queryset(self):
+        try:
+            pk = self.kwargs['pk']
+            queryset = Motivation.objects.get(id=pk)
+            return Motivation.objects.filter(id=queryset.id)
+        except Motivation.DoesNotExist:
+            raise Http404('Motivation with this "id" does not found...')
 
-
-class MotivationView(CreateView):
-    template_name = 'post.html'
-
-    def get(self, request):
-        form = MotivationForm
-        context = {
-            'form': form    
-        }
-        return render(request, self.template_name, context)
         
+
+class RandomMotivation(ListAPIView):
+    queryset = Motivation.objects.all().order_by('?')[:1]
+    serializer_class = MotivationSerializer
+
+
+@permission_classes((AllowAny,))
+class MotivationView(APIView):
+
     def post(self, request):
-        form = MotivationForm(request.POST)
-        
-        if form.is_valid():
-            motivation = form.save(commit=False)
-            motivation.nickname = request.user
-            motivation.save()
-            return redirect('main')
-        context = {
-            'form': form
-        }
-        return render(request, self.template_name, context)
+        serializer = AddMotivationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response('Motivation successfully saved')
