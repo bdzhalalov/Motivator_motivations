@@ -7,9 +7,3 @@ class MotivationSerializer(ModelSerializer):
 
         model = Motivation
         fields = ('id', 'nickname', 'motivation')
-
-class AddMotivationSerializer(ModelSerializer):
-    class Meta:
-
-        model = Motivation
-        fields = ('nickname', 'motivation')
