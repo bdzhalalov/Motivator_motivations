@@ -1,10 +1,12 @@
 from django.urls import path
-from .views import MotivationView, MotivationList, MotivationListDetails , RandomMotivation
+from .views import MotivationList, RandomMotivation
+from rest_framework.routers import SimpleRouter
 
+router = SimpleRouter()
+router.register(r'motivations', MotivationList)
 
 urlpatterns = [
-    path('motivations/new', MotivationView.as_view(), name='motivations'),
-    path('motivations/', MotivationList.as_view()),
-    path('motivations/<int:pk>', MotivationListDetails.as_view()),
     path('motivations/random', RandomMotivation.as_view(), name='home'),
 ]
+
+urlpatterns += router.urls
