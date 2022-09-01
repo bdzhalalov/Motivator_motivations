@@ -6,4 +6,4 @@ class MotivationSerializer(ModelSerializer):
     class Meta:
 
         model = Motivation
-        fields = ('id', 'nickname', 'motivation')
+        fields = '__all__'
