@@ -2,13 +2,14 @@ from rest_framework.test import APITestCase
 from motivations.models import Motivation
 from motivations.serializers import MotivationSerializer
 from django.urls import reverse
-from dotenv import load_dotenv
 from rest_framework import status
+import unittest.mock
 import os
-load_dotenv()
 
 class MotivationApiTestCase(APITestCase):
 
+    @unittest.mock.patch.dict('os.environ', {'API-KEY': 'Test_value'})
+    #TODO: Should make .env-testing file for test variables like API-KEY.
     def setUp(self):
         self.motivation = Motivation.objects.create(nickname='Test_user', motivation='Test motivation')
 
