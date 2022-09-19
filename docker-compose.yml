@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   db-mysql:
+    container_name: db-mysql
     image: mysql:5.7.37
     volumes:
       - mysql_data:/var/lib/mysql
@@ -28,6 +29,20 @@ services:
     ports:
      - 9000:9000
      - 4000:4000
+  
+  redis:
+    container_name: redis
+    image: redis:latest
+  
+  worker:
+    container_name: worker
+    build: .
+    command: ['celery', '--workdir=./motivator', '-A', 'motivator', 'worker']
+
+  beat:
+    container_name: beat
+    build: .
+    command: ['celery', '--workdir=./motivator', '-A', 'motivator', 'beat', '-l', 'info']
 
 volumes:
   mysql_data:
