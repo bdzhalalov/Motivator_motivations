@@ -13,7 +13,7 @@ class PagePagination(PageNumberPagination):
 @permission_classes((AllowAny,))
 class MotivationList(ModelViewSet):
     serializer_class = MotivationSerializer
-    queryset = Motivation.objects.filter(is_visible=True)
+    queryset = Motivation.objects.filter(is_visible=True).order_by('id')
     pagination_class = PagePagination
         
 
