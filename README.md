@@ -4,7 +4,7 @@ This API is intended for services that want to provide users with the ability to
 
 ## Dependencies
 
-* Python 3.10.5
+* Django 4.0.6
 * MySQL 5.7.37
 * Redis 6.0
 * Celery 5.2.7
