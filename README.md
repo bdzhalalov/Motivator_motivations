@@ -29,4 +29,4 @@ This API is intended for services that want to provide users with the ability to
 
 You can use [Motivator_users](https://github.com/Bahch1k/Motivator_users) project or use Postman to test API.
 
-Don't forget create `.env` file to setup anvironment variables like `API-KEY` or variables to connect to the database.
+Don't forget create `.env` file to setup environment variables like `API-KEY` or variables to connect to the database.
