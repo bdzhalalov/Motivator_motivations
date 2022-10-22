@@ -23,7 +23,7 @@ This API is intended for services that want to provide users with the ability to
 
 * Redis is used as broker for tasks in Celery and cache backend for save `Etag` header for responses.
 
-* `Etag` header allows to send response with `304` status code if he matchs with `If-none-match` header in request.
+* `Etag` header allows to send a response with `304` status code if he matches with `If-none-match` header in request.
 
 ## Usage
 
