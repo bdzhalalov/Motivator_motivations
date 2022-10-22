@@ -15,9 +15,9 @@ This API is intended for services that want to provide users with the ability to
 
 * All parts of API are placed in docker containers and combined using a `docker-compose` file.
 
-* Access to API realized with API-key which checked with custom `middleware`.
+* Access to API is realized with API-key which is checked with custom `middleware`.
 
-* It's possibly to test API with tests that are avialable in it (standart `unittest` library or `pytest` library).
+* It's possible to test API with tests that are avialable in it (standart `unittest` library or `pytest` library).
 
 * Motivations from unregistered users are hidden, but become visible after 15 minutes due to the work of Celery.
 
@@ -29,4 +29,4 @@ This API is intended for services that want to provide users with the ability to
 
 You can use [Motivator_users](https://github.com/Bahch1k/Motivator_users) project or use Postman to test API.
 
-Don't forget create `.env` file to setup environment variables like `API-KEY` or variables to connect to the database.
+Don't forget to create `.env` file to setup environment variables like `API-KEY` or variables to connect to the database.
